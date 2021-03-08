@@ -1,0 +1,109 @@
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/pwm/pwm.h>
+
+/ {
+    compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <&dsi1>;
+		__overlay__ {
+			#address-cells = <1>; size-cells = <0>;
+			status = "okay";
+			port {
+				dsi_out_port: endpoint {
+					remote-endpoint = <&panel_dsi_port>;
+				};
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&dsi1>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			panel_mt070:panel@0 {
+				compatible = "renesassp,r69429";
+				reset-gpios = <&gpio 5 0>;
+				reg = <0>;
+				backlight = <&backlight>;
+				port {
+					panel_dsi_port: endpoint {
+						remote-endpoint = <&dsi_out_port>;
+					  };
+				  };
+			  };
+		  };
+	};
+
+  fragment@2 {
+    target = <&gpio>;
+    __overlay__ {
+            pwm_pins: pwm_pins {
+                    brcm,pins = <13>;
+                    brcm,function = <4>;//alt0 to select PWM0
+                    bcrm,pull = <2>;
+            };
+            bl_pins: bl_pins {
+                    brcm,pins = <10>;
+                    brcm,function = <1>;//gpio out
+            };
+            touch_pins: touch_pins {
+                    brcm,pins = <4 17 11>; //4 == CTP_INT // 17=!CTP_RST // 11 - EN
+                    brcm,function = <0 0 0>; // gpio in in
+                    brcm,pull = <2 2 2>; // pull up up
+            };
+    };
+  };
+
+
+  fragment@3 {
+    target = <&pwm>;
+    frag1: __overlay__ {
+            pinctrl-names = "default";
+            pinctrl-0 = <&pwm_pins>;
+            assigned-clock-rates = <100000000>;
+            status = "okay";
+    };
+  };
+
+  fragment@4 {
+    target-path = "/soc";
+    __overlay__ {
+         backlight: backlight {
+            compatible = "pwm-backlight";
+            brightness-levels = <0 255>;
+            num-interpolated-steps = <255>;
+            default-brightness-level = <155>;
+            pwms = <&pwm 1 200000 PWM_POLARITY_INVERTED>;
+            enable-gpios = <&gpio 10 0>;
+            power-supply = <&vdd_3v3_reg>;
+            status = "okay";
+          };
+    };
+  };
+  fragment@5 {
+    target = <&i2c1>;
+    __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status = "okay";
+            touch: gt911@14 {
+                    compatible = "goodix,gt911";
+                    reg = <0x14>;
+                    pinctrl-names = "default";
+                    pinctrl-0 = <&touch_pins>;
+                    interrupt-parent = <&gpio>;
+                    interrupts = <4 2>;
+                    irq-gpios = <&gpio 4 0>;
+                    touchscreen-size-x = <1200>;
+                    touchscreen-size-y = <1920>;
+                    reset-gpios = <&gpio 17 0>;
+            };
+    };
+  };
+};
