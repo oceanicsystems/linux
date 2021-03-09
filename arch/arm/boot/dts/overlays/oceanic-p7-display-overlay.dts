@@ -30,7 +30,7 @@
 				compatible = "renesassp,r69429";
 				reset-gpios = <&gpio 5 0>;
 				reg = <0>;
-				//backlight = <&backlight>;
+				backlight = <&backlight>;
 				port {
 					panel_dsi_port: endpoint {
 						remote-endpoint = <&dsi_out_port>;
@@ -44,9 +44,9 @@
     target = <&gpio>;
     __overlay__ {
             pwm_pins: pwm_pins {
-                    brcm,pins = <13>;
-                    brcm,function = <4>;//alt0 to select PWM0
-                    bcrm,pull = <2>;
+                    brcm,pins = <13 10>;
+                    brcm,function = <4 1>;//alt0 to select PWM0
+                    bcrm,pull = <2 2>;
             };
             bl_pins: bl_pins {
                     brcm,pins = <10>;
@@ -76,10 +76,10 @@
     __overlay__ {
          backlight: backlight {
             compatible = "pwm-backlight";
-            brightness-levels = <0 255>;
+            brightness-levels = <255 0>;
             num-interpolated-steps = <255>;
-            default-brightness-level = <155>;
-            pwms = <&pwm 1 200000 PWM_POLARITY_INVERTED>;
+            default-brightness-level = <50>;
+            pwms = <&pwm 1 200000>;
             enable-gpios = <&gpio 10 0>;
             power-supply = <&vdd_3v3_reg>;
             status = "okay";
