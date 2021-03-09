@@ -30,7 +30,7 @@
 				compatible = "renesassp,r69429";
 				reset-gpios = <&gpio 5 0>;
 				reg = <0>;
-				backlight = <&backlight>;
+				//backlight = <&backlight>;
 				port {
 					panel_dsi_port: endpoint {
 						remote-endpoint = <&dsi_out_port>;
