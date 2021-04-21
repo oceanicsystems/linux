@@ -30,11 +30,4 @@
 			bootargs = "8250.nr_uarts=1";
 		};
 	};
-	fragment@3 {
-		target-path = "/aliases";
-		__overlay__ {
-			serial0 = "/soc/serial@7e201000";
-			serial1 = "/soc/serial@7e215040";
-		};
-	};
 };
