@@ -45,8 +45,8 @@
     __overlay__ {
             pwm_pins: pwm_pins {
                     brcm,pins = <13>;
-                    brcm,function = <4>;//alt0 to select PWM0
-                    bcrm,pull = <2>;
+                    brcm,function = <1>;//gpio out
+                    bcrm,pull = <1>;
             };
             bl_pins: bl_pins {
                     brcm,pins = <10>;
