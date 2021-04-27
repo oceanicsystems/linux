@@ -44,8 +44,8 @@
     target = <&gpio>;
     __overlay__ {
             pwm_pins: pwm_pins {
-                    brcm,pins = <13 10>;
-                    brcm,function = <4 1>;//alt0 to select PWM0
+                    brcm,pins = <10>;
+                    brcm,function = <1>;//alt0 to select PWM0
                     bcrm,pull = <2 2>;
             };
             bl_pins: bl_pins {
@@ -76,12 +76,9 @@
     __overlay__ {
          backlight: backlight {
             compatible = "pwm-backlight";
-            brightness-levels = <255 0>;
-            num-interpolated-steps = <255>;
-            default-brightness-level = <50>;
-            pwms = <&pwm 1 200000>;
-            enable-gpios = <&gpio 10 0>;
+            gpios = <&gpio 10 0>;
             power-supply = <&vdd_3v3_reg>;
+            default-on;
             status = "okay";
           };
     };
