@@ -38,6 +38,10 @@ static inline struct lcd183_panel *to_lcd183_panel(struct drm_panel *panel)
 
 static int lcd183_panel_init(struct lcd183_panel *lcd183)
 {
+	gpiod_set_value_cansleep(lcd183->reset_gpio, 0);
+	msleep(25);
+	gpiod_set_value_cansleep(lcd183->reset_gpio, 1);
+	msleep(510);
 	return 0;
 }
 
@@ -232,7 +236,7 @@ static int lcd183_panel_add(struct lcd183_panel *lcd183)
 		return ret;
 	}
 
-	lcd183->reset_gpio = devm_gpiod_get(dev, "reset", GPIOD_OUT_HIGH);
+	lcd183->reset_gpio = devm_gpiod_get(dev, "reset", GPIOD_OUT_LOW);
 	if (IS_ERR(lcd183->reset_gpio)) {
 		ret = PTR_ERR(lcd183->reset_gpio);
 		dev_err(dev, "cannot get reset-gpios %d\n", ret);
