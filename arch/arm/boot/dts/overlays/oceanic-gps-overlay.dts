@@ -17,7 +17,7 @@
 		target = <&gpio>;
 		__overlay__ {
 			uart1_pins: uart1_pins {
-				brcm,pins = <14 15 12 16>;
+				brcm,pins = <14 15 12 29>;
 				brcm,function = <2 2 0 0>; /* alt5 */
 				brcm,pull = <0 2 2 2>;
 			};

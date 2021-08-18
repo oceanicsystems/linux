@@ -26,9 +26,10 @@
 			#size-cells = <0>;
 			status = "okay";
 
-			panel_mt070:panel@0 {
-				compatible = "renesassp,r69429";
+			panel_lcd183:panel@0 {
+				compatible = "ltc,lcd183";
 				reset-gpios = <&gpio 5 0>;
+        vsx-gpios = <&gpio 8 0>;
 				reg = <0>;
 				backlight = <&backlight>;
 				port {
@@ -43,20 +44,15 @@
   fragment@2 {
     target = <&gpio>;
     __overlay__ {
-            pwm_pins: pwm_pins {
-                    brcm,pins = <13>;
-                    brcm,function = <0>;//gpio in
-                    bcrm,pull = <1>;
-            };
             bl_pins: bl_pins {
                     brcm,pins = <10>;
                     brcm,function = <1>;//gpio out
             };
-            touch_pins: touch_pins {
+            /* touch_pins: touch_pins {
                     brcm,pins = <4 17 11>; //4 == CTP_INT // 17=!CTP_RST // 11 - EN
                     brcm,function = <0 0 0>; // gpio in in
                     brcm,pull = <2 2 2>; // pull up up
-            };
+            }; */
     };
   };
 
@@ -82,7 +78,7 @@
           };
     };
   };
-  fragment@5 {
+  /* fragment@5 {
     target = <&i2c1>;
     __overlay__ {
             #address-cells = <1>;
@@ -101,5 +97,5 @@
                     reset-gpios = <&gpio 17 0>;
             };
     };
-  };
+  }; */
 };
