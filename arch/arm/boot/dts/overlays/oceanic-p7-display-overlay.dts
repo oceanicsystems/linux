@@ -27,6 +27,7 @@
 			status = "okay";
 
 			panel_lcd183:panel@0 {
+        pinctrl-0 = <&disp_pins>;
 				compatible = "ltc,lcd183";
 				reset-gpios = <&gpio 5 0>;
         vsx-gpios = <&gpio 8 0>;
@@ -44,6 +45,10 @@
   fragment@2 {
     target = <&gpio>;
     __overlay__ {
+            disp_pins: bl_pins {
+                    brcm,pins = <5,8>;
+                    brcm,function = <1,1>;//gpio out
+            };
             bl_pins: bl_pins {
                     brcm,pins = <10>;
                     brcm,function = <1>;//gpio out
