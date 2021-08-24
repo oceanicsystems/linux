@@ -45,7 +45,7 @@
   fragment@2 {
     target = <&gpio>;
     __overlay__ {
-            disp_pins: bl_pins {
+            disp_pins: disp_pins {
                     brcm,pins = <5,8>;
                     brcm,function = <1,1>;//gpio out
             };
