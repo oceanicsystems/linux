@@ -24,7 +24,7 @@ struct lcd183_panel {
 	struct regulator_bulk_data supplies[ARRAY_SIZE(regulator_names)];
 
 	struct gpio_desc *reset_gpio;
-	struct gpio_desc *vsx_gpio;
+	//struct gpio_desc *vsx_gpio;
 
 	bool prepared;
 	bool enabled;
@@ -129,7 +129,7 @@ static int lcd183_panel_prepare(struct drm_panel *panel)
 		dev_err(dev, "regulator enable failed, %d\n", ret);
 		return ret;
 	}
-	gpiod_set_value_cansleep(lcd183->vsx_gpio, 1);
+	//gpiod_set_value_cansleep(lcd183->vsx_gpio, 1);
 	msleep(25);
 	ret = lcd183_panel_init(lcd183);
 
@@ -245,12 +245,12 @@ static int lcd183_panel_add(struct lcd183_panel *lcd183)
 		return ret;
 	}
 
-	lcd183->vsx_gpio = devm_gpiod_get(dev, "vsx", GPIOD_OUT_LOW);
-	if (IS_ERR(lcd183->vsx_gpio)) {
-		ret = PTR_ERR(lcd183->vsx_gpio);
-		dev_err(dev, "cannot get vsx-gpios %d\n", ret);
-		return ret;
-	}
+	// lcd183->vsx_gpio = devm_gpiod_get(dev, "vsx", GPIOD_OUT_LOW);
+	// if (IS_ERR(lcd183->vsx_gpio)) {
+	// 	ret = PTR_ERR(lcd183->vsx_gpio);
+	// 	dev_err(dev, "cannot get vsx-gpios %d\n", ret);
+	// 	return ret;
+	// }
 
 	drm_panel_init(&lcd183->base, &lcd183->dsi->dev, &lcd183_panel_funcs,
 			DRM_MODE_CONNECTOR_DSI);
