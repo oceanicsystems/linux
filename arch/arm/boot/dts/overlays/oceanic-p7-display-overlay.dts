@@ -46,8 +46,8 @@
     target = <&gpio>;
     __overlay__ {
             disp_pins: disp_pins {
-                    brcm,pins = <5,8>;
-                    brcm,function = <1,1>;//gpio out
+                    brcm,pins = <5 8>;
+                    brcm,function = <1 1>;//gpio out
             };
             bl_pins: bl_pins {
                     brcm,pins = <10>;
