@@ -1,0 +1,106 @@
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/pwm/pwm.h>
+
+/ {
+    compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <&dsi1>;
+		__overlay__ {
+			#address-cells = <1>; size-cells = <0>;
+			status = "okay";
+			port {
+				dsi_out_port: endpoint {
+					remote-endpoint = <&panel_dsi_port>;
+				};
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&dsi1>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			panel_lcd183:panel@0 {
+        pinctrl-0 = <&disp_pins>;
+				compatible = "ltc,lcd183";
+				reset-gpios = <&gpio 5 0>;
+        /* vsx-gpios = <&gpio 8 0>; */
+				reg = <0>;
+				backlight = <&backlight>;
+				port {
+					panel_dsi_port: endpoint {
+						remote-endpoint = <&dsi_out_port>;
+					  };
+				  };
+			  };
+		  };
+	};
+
+  fragment@2 {
+    target = <&gpio>;
+    __overlay__ {
+            disp_pins: disp_pins {
+                    brcm,pins = <5>;
+                    brcm,function = <1>;//gpio out
+            };
+            bl_pins: bl_pins {
+                    brcm,pins = <10>;
+                    brcm,function = <1>;//gpio out
+            };
+            /* touch_pins: touch_pins {
+                    brcm,pins = <4 17 11>; //4 == CTP_INT // 17=!CTP_RST // 11 - EN
+                    brcm,function = <0 0 0>; // gpio in in
+                    brcm,pull = <2 2 2>; // pull up up
+            }; */
+    };
+  };
+
+
+  fragment@3 {
+    target = <&gpio>;
+    frag1: __overlay__ {
+            pinctrl-names = "default";
+            pinctrl-0 = <&bl_pins>;
+            status = "okay";
+    };
+  };
+
+  fragment@4 {
+    target-path = "/soc";
+    __overlay__ {
+         backlight: backlight {
+            compatible = "gpio-backlight";
+            gpios = <&gpio 10 0>;
+            default-on;
+            power-supply = <&vdd_3v3_reg>;
+            status = "okay";
+          };
+    };
+  };
+  /* fragment@5 {
+    target = <&i2c1>;
+    __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status = "okay";
+            touch: gt911@14 {
+                    compatible = "goodix,gt911";
+                    reg = <0x14>;
+                    pinctrl-names = "default";
+                    pinctrl-0 = <&touch_pins>;
+                    interrupt-parent = <&gpio>;
+                    interrupts = <4 2>;
+                    irq-gpios = <&gpio 4 0>;
+                    touchscreen-size-x = <1200>;
+                    touchscreen-size-y = <1920>;
+                    reset-gpios = <&gpio 17 0>;
+            };
+    };
+  }; */
+};
