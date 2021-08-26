@@ -164,15 +164,15 @@ static int r69429_panel_enable(struct drm_panel *panel)
 }
 
 static const struct drm_display_mode default_mode = {
-	.clock = 	151350,
+	.clock = 	162000,
 	.hdisplay = 	1200,
-	.hsync_start = 	1200 + 60,
-	.hsync_end = 	1200 + 60 + 10,
-	.htotal = 	1200 + 60 + 10 + 35,
+	.hsync_start = 	1200 + 11,
+	.hsync_end = 	1200 + 11 + 8,
+	.htotal = 	1200 + 11 + 8 + 10,
 	.vdisplay = 	1920,
-	.vsync_start = 	1920 + 5,
-	.vsync_end = 	1920 + 5 + 2,
-	.vtotal = 	1920 + 5 + 2 + 6,
+	.vsync_start = 	1920 + 4,
+	.vsync_end = 	1920 + 4 + 4,
+	.vtotal = 	1920 + 4 + 4 + 76,
 };
 
 static int r69429_panel_get_modes(struct drm_panel *panel,
