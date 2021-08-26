@@ -265,7 +265,8 @@ static int r69429_panel_probe(struct mipi_dsi_device *dsi)
 	dsi->mode_flags =  MIPI_DSI_MODE_VIDEO |
 				MIPI_DSI_MODE_VIDEO_HSE |
 				MIPI_DSI_CLOCK_NON_CONTINUOUS |
-				MIPI_DSI_MODE_VIDEO_BURST;
+				MIPI_DSI_MODE_VIDEO_BURST |
+				MIPI_DSI_MODE_LPM;
 
 	r69429 = devm_kzalloc(&dsi->dev, sizeof(*r69429), GFP_KERNEL);
 	if (!r69429)
