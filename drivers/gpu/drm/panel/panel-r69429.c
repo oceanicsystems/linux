@@ -38,68 +38,6 @@ static inline struct r69429_panel *to_r69429_panel(struct drm_panel *panel)
 
 static int r69429_panel_init(struct r69429_panel *r69429)
 {
-	struct mipi_dsi_device *dsi = r69429->dsi;
-	int ret;
-	int err;
-
-	// Command access protect
-	u8 com1[] = { 0xb0, 0x00 };
-	err =  mipi_dsi_generic_write(dsi, com1, 2);
-	err +=  mipi_dsi_generic_write(dsi, com1, 2);
-
-	u8 com2[] = { 0xd6, 0x01 };
-	err +=  mipi_dsi_generic_write(dsi, com2, 2);
-
-	u8 com3[] = { 0xb3, 0x04, 0x08, 0x00, 0x22, 0x00 };
-	err +=  mipi_dsi_generic_write(dsi, com3, 6);
-
-	//Interface setting
-	u8 com4[] = { 0xb3, 0x14, 0x08, 0x00, 0x22, 0x00 };
-	// video thru mode w/o RAM
-	err +=  mipi_dsi_generic_write(dsi, com4, 6);
-
-	// interface ID setting
-	u8 com5[] = { 0xb4, 0x0c }; // virt chan 0
-	err +=  mipi_dsi_generic_write(dsi, com5, 2);
-
-	u8 coma1[] = { 0xde, 0x00 };
-	err +=  mipi_dsi_generic_write(dsi, coma1, 2 );
-
-	// dsi control - 1Gbit/s/lane / 500MHz.
-	u8 com6[] = { 0xb6, 0x3a, 0xd3 };
-	err +=  mipi_dsi_generic_write(dsi, com6, 3);
-
-	u8 com7[] = { 0x67, 0x60, 0x02 };
-	err +=  mipi_dsi_generic_write(dsi, com7, 3);
-
-	// write_display_brightness
-	u8 com8[] = { 0x51, 0xe0 };
-	err +=  mipi_dsi_generic_write(dsi, com8, 2);
-
-	// write_CTRL_display
-	u8 com9[] = { 0x53, 0x04 };
-	err +=  mipi_dsi_generic_write(dsi, com9, 2);
-
-	// set pixel format
-	u8 com10[] = { 0x3a, 0x77 }; // 24 bpp
-	err +=  mipi_dsi_generic_write(dsi, com10, 2);
-
-	// set tear on
-	u8 coma2[] = { 0x35, 0x01 };
-	err +=  mipi_dsi_generic_write(dsi, coma2, 2);
-
-	// set column address
-	u8 com11[] = { 0x2a, 0x00, 0x00, 0x04, 0xaf };
-	err +=  mipi_dsi_generic_write(dsi, com11, 5);
-
-	// set page address
-	u8 com12[] = { 0x2b, 0x00, 0x00, 0x07, 0x7f };
-	err +=  mipi_dsi_generic_write(dsi, com12, 5);
-
-	if (err < 0) {
-		DRM_ERROR("failed to init: %d\n",ret);
-		return err;
-	}
 	return 0;
 }
 
