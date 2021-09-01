@@ -170,13 +170,13 @@ static int r69429_panel_enable(struct drm_panel *panel)
 static const struct drm_display_mode default_mode = {
 	.clock = 	162000,
 	.hdisplay = 	1200,
-	.hsync_start = 	1200 + 11,
-	.hsync_end = 	1200 + 11 + 8,
-	.htotal = 	1200 + 11 + 8 + 10,
+	.hsync_start = 	1200 + 70,
+	.hsync_end = 	1200 + 70 + 8,
+	.htotal = 	1200 + 70 + 8 + 70,
 	.vdisplay = 	1920,
 	.vsync_start = 	1920 + 4,
-	.vsync_end = 	1920 + 4 + 4,
-	.vtotal = 	1920 + 4 + 4 + 76,
+	.vsync_end = 	1920 + 4 + 2,
+	.vtotal = 	1920 + 4 + 4 + 84,
 };
 
 static int r69429_panel_get_modes(struct drm_panel *panel,
@@ -263,10 +263,8 @@ static int r69429_panel_probe(struct mipi_dsi_device *dsi)
 	dsi->lanes = 4;
 	dsi->format = MIPI_DSI_FMT_RGB888;
 	dsi->mode_flags =  MIPI_DSI_MODE_VIDEO |
-				MIPI_DSI_MODE_VIDEO_HSE |
-				MIPI_DSI_CLOCK_NON_CONTINUOUS |
-				MIPI_DSI_MODE_VIDEO_BURST |
-				MIPI_DSI_MODE_LPM;
+											MIPI_DSI_CLOCK_NON_CONTINUOUS |
+											MIPI_DSI_MODE_LPM;
 
 	r69429 = devm_kzalloc(&dsi->dev, sizeof(*r69429), GFP_KERNEL);
 	if (!r69429)

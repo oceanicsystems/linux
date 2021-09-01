@@ -269,14 +269,16 @@
 # define DSI_PHYC_DLANE0_ULPS		BIT(1)
 # define DSI_PHYC_DLANE0_ENABLE		BIT(0)
 
-#define DSI0_HS_CLT0		0x44
-#define DSI0_HS_CLT1		0x48
-#define DSI0_HS_CLT2		0x4c
-#define DSI0_HS_DLT3		0x50
-#define DSI0_HS_DLT4		0x54
-#define DSI0_HS_DLT5		0x58
-#define DSI0_HS_DLT6		0x5c
-#define DSI0_HS_DLT7		0x60
+// Config Registers
+
+#define DSI0_HS_CLT0		0x44 // HS CLK
+#define DSI0_HS_CLT1		0x48 // HS CLK
+#define DSI0_HS_CLT2		0x4c // ULPS WakeUp
+#define DSI0_HS_DLT3		0x50 // HS DATA
+#define DSI0_HS_DLT4		0x54 // HS DATA
+#define DSI0_HS_DLT5		0x58 // INIT
+#define DSI0_HS_DLT6		0x5c // Not sure?
+#define DSI0_HS_DLT7		0x60 // ULPS Wakeup
 
 #define DSI0_PHY_AFEC0		0x64
 # define DSI0_PHY_AFEC0_DDR2CLK_EN		BIT(26)
