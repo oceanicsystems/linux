@@ -51,17 +51,22 @@ static int r69429_panel_on(struct r69429_panel *r69429)
 	struct device *dev = &r69429->dsi->dev;
 	int ret;
 
-	ret = mipi_dsi_dcs_set_display_on(dsi);
-	if (ret < 0)
-		dev_err(dev, "failed to set display on: %d\n",ret);
-
-	msleep(100);
+	// ret = mipi_dsi_dcs_write(dev, 0x09, 0x01);
+	// if (ret < 0)
+	// 	dev_err(dev, "failed to enter bypass mode: %d\n",ret);
 
 	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
 	if (ret < 0)
 		dev_err(dev, "failed to exit sleep mode: %d\n",ret);
 
-	msleep(100);
+	msleep(150);
+
+	ret = mipi_dsi_dcs_set_display_on(dsi);
+	if (ret < 0)
+		dev_err(dev, "failed to set display on: %d\n",ret);
+
+	msleep(150);
+
 	return ret;
 }
 
@@ -168,15 +173,15 @@ static int r69429_panel_enable(struct drm_panel *panel)
 }
 
 static const struct drm_display_mode default_mode = {
-	.clock = 	162000,
+	.clock = 	162560,
 	.hdisplay = 	1200,
-	.hsync_start = 	1200 + 11,
-	.hsync_end = 	1200 + 11 + 8,
-	.htotal = 	1200 + 11 + 8 + 10,
+	.hsync_start = 	1200 + 70,
+	.hsync_end = 	1200 + 70 + 8,
+	.htotal = 	1200 + 70 + 8 + 70,
 	.vdisplay = 	1920,
 	.vsync_start = 	1920 + 4,
-	.vsync_end = 	1920 + 4 + 4,
-	.vtotal = 	1920 + 4 + 4 + 76,
+	.vsync_end = 	1920 + 4 + 2,
+	.vtotal = 	1920 + 4 + 2 + 84,
 };
 
 static int r69429_panel_get_modes(struct drm_panel *panel,
@@ -263,7 +268,6 @@ static int r69429_panel_probe(struct mipi_dsi_device *dsi)
 	dsi->lanes = 4;
 	dsi->format = MIPI_DSI_FMT_RGB888;
 	dsi->mode_flags =  MIPI_DSI_MODE_VIDEO |
-											MIPI_DSI_CLOCK_NON_CONTINUOUS |
 											MIPI_DSI_MODE_LPM;
 
 	r69429 = devm_kzalloc(&dsi->dev, sizeof(*r69429), GFP_KERNEL);

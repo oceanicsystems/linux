@@ -1070,7 +1070,7 @@ static void vc4_dsi_encoder_enable(struct drm_encoder *encoder)
 			       VC4_SET_FIELD(dsi->divider,
 					     DSI_DISP0_PIX_CLK_DIV) |
 			       VC4_SET_FIELD(dsi->format, DSI_DISP0_PFORMAT) |
-			       VC4_SET_FIELD(DSI_DISP0_LP_STOP_PERFRAME,
+			       VC4_SET_FIELD(DSI_DISP0_LP_STOP_PERLINE,
 					     DSI_DISP0_LP_STOP_CTRL) |
 			       DSI_DISP0_ENABLE);
 	} else {
