@@ -41,6 +41,10 @@ static int r69429_panel_init(struct r69429_panel *r69429)
 	gpiod_set_value_cansleep(r69429->reset_gpio, 0);
 	msleep(25);
 	gpiod_set_value_cansleep(r69429->reset_gpio, 1);
+	msleep(25);
+	gpiod_set_value_cansleep(r69429->reset_gpio, 0);
+	msleep(25);
+	gpiod_set_value_cansleep(r69429->reset_gpio, 1);
 	msleep(510);
 	return 0;
 }
