@@ -1065,24 +1065,15 @@ static void vc4_dsi_encoder_enable(struct drm_encoder *encoder)
 			iter->funcs->pre_enable(iter);
 	}
 
-	if (dsi->mode_flags & MIPI_DSI_MODE_VIDEO & ~MIPI_DSI_MODE_VIDEO_BURST ) {
+	if (dsi->mode_flags & MIPI_DSI_MODE_VIDEO ) {
 		DSI_PORT_WRITE(DISP0_CTRL,
 			       VC4_SET_FIELD(dsi->divider,
 					     DSI_DISP0_PIX_CLK_DIV) |
 			       VC4_SET_FIELD(dsi->format, DSI_DISP0_PFORMAT) |
 			       VC4_SET_FIELD(DSI_DISP0_LP_STOP_PERFRAME,
 					     DSI_DISP0_LP_STOP_CTRL) |
-						 DSI_DISP0_ST_END |
 			       DSI_DISP0_ENABLE);
-	} else if (dsi->mode_flags & MIPI_DSI_MODE_VIDEO_BURST ) {
-			DSI_PORT_WRITE(DISP0_CTRL,
-				       VC4_SET_FIELD(dsi->divider,
-						     DSI_DISP0_PIX_CLK_DIV) |
-				       VC4_SET_FIELD(dsi->format, DSI_DISP0_PFORMAT) |
-				       VC4_SET_FIELD(DSI_DISP0_LP_STOP_PERLINE,
-						     DSI_DISP0_LP_STOP_CTRL) |
-				       DSI_DISP0_ENABLE);
-		} else {
+	} else {
 		DSI_PORT_WRITE(DISP0_CTRL,
 			       DSI_DISP0_COMMAND_MODE |
 			       DSI_DISP0_ENABLE);
