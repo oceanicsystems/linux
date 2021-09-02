@@ -1072,7 +1072,7 @@ static void vc4_dsi_encoder_enable(struct drm_encoder *encoder)
 			       VC4_SET_FIELD(dsi->format, DSI_DISP0_PFORMAT) |
 			       VC4_SET_FIELD(DSI_DISP0_LP_STOP_PERLINE,
 					     DSI_DISP0_LP_STOP_CTRL) |
-						 DSI_DISP0_ST_END
+						 DSI_DISP0_ST_END |
 			       DSI_DISP0_ENABLE);
 	} else {
 		DSI_PORT_WRITE(DISP0_CTRL,
