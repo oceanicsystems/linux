@@ -389,6 +389,14 @@ config TOUCHSCREEN_FUJITSU
 	  To compile this driver as a module, choose M here: the
 	  module will be called fujitsu-ts.
 
+config TOUCHSCREEN_FTS
+	bool "Focaltech Touchscreen"
+	depends on I2C
+	default n
+	help
+	  Say Y here if you have Focaltech touch panel.
+	  If unsure, say N.
+
 config TOUCHSCREEN_GOODIX
 	tristate "Goodix I2C touchscreen"
 	depends on I2C
