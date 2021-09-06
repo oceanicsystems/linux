@@ -92,18 +92,14 @@
             #address-cells = <1>;
             #size-cells = <0>;
             status = "okay";
-            touch: gt911@38 {
+            touch: fts@38 {
                     compatible = "focaltech,fts";
                     reg = <0x38>;
                     pinctrl-names = "default";
                     pinctrl-0 = <&touch_pins>;
                     interrupt-parent = <&gpio>;
                     interrupts = <4 2>;
-                    irq-gpios = <&gpio 4 0>;
-                    touchscreen-size-x = <1200>;
-                    touchscreen-size-y = <1920>;
-                    reset-gpios = <&gpio 17 0>;
-                    focaltech,reset-gpio = <&gpio 5 0>;
+                    focaltech,reset-gpio = <&gpio 17 0>;
                     focaltech,irq-gpio = <&gpio 4 0>;
                     focaltech,max-touch-number = <5>;
                     focaltech,display-coords =  <0 0 1200 1920>;
