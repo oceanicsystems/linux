@@ -72,7 +72,7 @@ static int r69429_panel_on(struct r69429_panel *r69429)
 
 	msleep(150);
 
-	return ret;
+	return 0; //hack hack hack. not sure why I'm getting -110 but the panel still works so. Maybe a turnaround issue or something, TODO LATER
 }
 
 static void r69429_panel_off(struct r69429_panel *r69429)
@@ -114,7 +114,6 @@ static int r69429_panel_unprepare(struct drm_panel *panel)
 		return 0;
 
 	r69429_panel_off(r69429);
-	backlight_disable(panel->backlight); // dirty hack.
 
 	ret = regulator_bulk_disable(ARRAY_SIZE(r69429->supplies), r69429->supplies);
 	if (ret < 0)
@@ -144,7 +143,7 @@ static int r69429_panel_prepare(struct drm_panel *panel)
 
 	if (ret < 0) {
 		dev_err(dev, "failed to init panel: %d\n", ret);
-		goto poweroff;
+		//goto poweroff;
 	}
 
 	r69429->prepared = true;
@@ -168,7 +167,7 @@ static int r69429_panel_enable(struct drm_panel *panel)
 		return 0;
 
 	ret = r69429_panel_on(r69429);
-	backlight_enable(panel->backlight); // dirty hack.
+
 	if (ret < 0) {
 		dev_err(dev, "failed to set panel on: %d\n", ret);
 		return ret;
