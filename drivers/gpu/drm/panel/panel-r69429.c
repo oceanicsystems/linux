@@ -114,8 +114,8 @@ static int r69429_panel_unprepare(struct drm_panel *panel)
 		return 0;
 
 	r69429_panel_off(r69429);
-	backlight_disable(r69429->backlight); // dirty hack.
-	
+	backlight_disable(panel->backlight); // dirty hack.
+
 	ret = regulator_bulk_disable(ARRAY_SIZE(r69429->supplies), r69429->supplies);
 	if (ret < 0)
 		dev_err(dev, "regulator disable failed, %d\n", ret);
