@@ -70,8 +70,6 @@ static int r69429_panel_on(struct r69429_panel *r69429)
 	if (ret < 0)
 		dev_err(dev, "failed to set display on: %d\n",ret);
 
-	backlight_enable(r69429->backlight); // dirty hack.
-
 	msleep(150);
 
 	return ret;
@@ -91,8 +89,6 @@ static void r69429_panel_off(struct r69429_panel *r69429)
 	if (ret < 0)
 		dev_err(dev, "failed to enter sleep mode: %d\n", ret);
 
-  backlight_disable(r69429->backlight); // dirty hack.
-	
 	msleep(100);
 }
 
@@ -118,7 +114,8 @@ static int r69429_panel_unprepare(struct drm_panel *panel)
 		return 0;
 
 	r69429_panel_off(r69429);
-
+	backlight_disable(r69429->backlight); // dirty hack.
+	
 	ret = regulator_bulk_disable(ARRAY_SIZE(r69429->supplies), r69429->supplies);
 	if (ret < 0)
 		dev_err(dev, "regulator disable failed, %d\n", ret);
@@ -171,6 +168,7 @@ static int r69429_panel_enable(struct drm_panel *panel)
 		return 0;
 
 	ret = r69429_panel_on(r69429);
+	backlight_enable(panel->backlight); // dirty hack.
 	if (ret < 0) {
 		dev_err(dev, "failed to set panel on: %d\n", ret);
 		return ret;
