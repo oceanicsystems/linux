@@ -3,6 +3,7 @@
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/regulator/consumer.h>
+#include <linux/backlight.h>
 
 #include <video/mipi_display.h>
 
@@ -69,6 +70,8 @@ static int r69429_panel_on(struct r69429_panel *r69429)
 	if (ret < 0)
 		dev_err(dev, "failed to set display on: %d\n",ret);
 
+	backlight_enable(r69429->backlight); // dirty hack.
+
 	msleep(150);
 
 	return ret;
@@ -88,6 +91,8 @@ static void r69429_panel_off(struct r69429_panel *r69429)
 	if (ret < 0)
 		dev_err(dev, "failed to enter sleep mode: %d\n", ret);
 
+  backlight_disable(r69429->backlight); // dirty hack.
+	
 	msleep(100);
 }
 

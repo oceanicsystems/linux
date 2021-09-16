@@ -162,7 +162,7 @@ int drm_panel_enable(struct drm_panel *panel)
 			     ret); // only added to see if we fall through before the BL is enabled
 			return ret;
 	}
-	DRM_DEV_INFO(panel->dev, "about to call the backlight\n"
+	DRM_DEV_INFO(panel->dev, "about to call the backlight\n");
 	ret = backlight_enable(panel->backlight);
 	if (ret < 0)
 		DRM_DEV_INFO(panel->dev, "failed to enable backlight: %d\n",
