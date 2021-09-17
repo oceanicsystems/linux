@@ -79,7 +79,7 @@
             brightness-levels = <255 0>;
             num-interpolated-steps = <255>;
             default-brightness-level = <50>;
-            pwms = <&pwm 1 200000>;
+            pwms = <&pwm 1 1000000>;
             enable-gpios = <&gpio 10 0>;
             power-supply = <&vdd_3v3_reg>;
             status = "okay";
