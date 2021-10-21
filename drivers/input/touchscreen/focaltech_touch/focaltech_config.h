@@ -85,7 +85,7 @@
  * show debug log info
  * enable it for debug, disable it for release
  */
-#define FTS_DEBUG_EN                            0
+#define FTS_DEBUG_EN                            1
 
 /*
  * Linux MultiTouch Protocol
@@ -129,12 +129,12 @@
  * Glove mode enable
  * 1: enable, 0:disable(default)
  */
-#define FTS_GLOVE_EN                            0
+#define FTS_GLOVE_EN                            1
 /*
  * cover enable
  * 1: enable, 0:disable(default)
  */
-#define FTS_COVER_EN                            0
+#define FTS_COVER_EN                            1
 /*
  * Charger enable
  * 1: enable, 0:disable(default)
@@ -145,7 +145,7 @@
  * Proximity sensor
  * default: disable
  */
-#define FTS_PSENSOR_EN                          0
+#define FTS_PSENSOR_EN                          1
 
 /*
  * Nodes for tools, please keep enable
