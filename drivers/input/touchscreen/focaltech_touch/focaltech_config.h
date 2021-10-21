@@ -97,7 +97,7 @@
  * Report Pressure in multitouch
  * 1:enable(default),0:disable
 */
-#define FTS_REPORT_PRESSURE_EN                  1
+#define FTS_REPORT_PRESSURE_EN                  0
 
 /*
  * Force touch support
@@ -129,12 +129,12 @@
  * Glove mode enable
  * 1: enable, 0:disable(default)
  */
-#define FTS_GLOVE_EN                            1
+#define FTS_GLOVE_EN                            0
 /*
  * cover enable
  * 1: enable, 0:disable(default)
  */
-#define FTS_COVER_EN                            1
+#define FTS_COVER_EN                            0
 /*
  * Charger enable
  * 1: enable, 0:disable(default)
@@ -145,7 +145,7 @@
  * Proximity sensor
  * default: disable
  */
-#define FTS_PSENSOR_EN                          1
+#define FTS_PSENSOR_EN                          0
 
 /*
  * Nodes for tools, please keep enable
