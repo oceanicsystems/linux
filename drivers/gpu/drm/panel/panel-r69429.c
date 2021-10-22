@@ -55,8 +55,8 @@ static int r69429_panel_on(struct r69429_panel *r69429)
 	struct mipi_dsi_device *dsi = r69429->dsi;
 	struct device *dev = &r69429->dsi->dev;
 	int ret;
-
-	ret = mipi_dsi_dcs_write(dsi, 0x09, 0x01);
+	u8 com1[] = { 0x09, 0x01 };
+	ret = mipi_dsi_dcs_write(dsi, com1, 2);
 	  if (ret < 0)
 	  	dev_err(dev, "failed to enter bypass mode: %d\n",ret);
 
