@@ -46,11 +46,7 @@
             pwm_pins: pwm_pins {
                     brcm,pins = <13 10>;
                     brcm,function = <4 1>;//alt0 to select PWM0
-                    bcrm,pull = <2 2>;
-            };
-            bl_pins: bl_pins {
-                    brcm,pins = <10>;
-                    brcm,function = <1>;//gpio out
+                    bcrm,pull = <1 2>;
             };
             touch_pins: touch_pins {
                     brcm,pins = <4 17>; //4 == CTP_INT // 17=!CTP_RST // 11 - EN
