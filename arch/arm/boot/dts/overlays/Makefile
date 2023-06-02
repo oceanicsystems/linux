@@ -122,10 +122,10 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
 	mmc.dtbo \
 	mpu6050.dtbo \
 	mz61581.dtbo \
+	oceanic-backlight.dtbo \
 	oceanic-gps.dtbo \
 	oceanic-p7-can.dtbo \
 	oceanic-p7-display.dtbo \
-	oceanic-backlight.dtbo \
 	ov5647.dtbo \
 	ov7251.dtbo \
 	ov9281.dtbo \
