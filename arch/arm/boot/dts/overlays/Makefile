@@ -162,7 +162,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
 	mmc.dtbo \
 	mpu6050.dtbo \
 	mz61581.dtbo \
-	oceanic-backlight.dtbo
+	oceanic-backlight.dtbo \
 	oceanic-can.dtbo \
 	oceanic-gps.dtbo \
 	ov2311.dtbo \
