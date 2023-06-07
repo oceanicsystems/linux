@@ -1,0 +1,42 @@
+
+/ {
+    compatible = "brcm,bcm2835";
+
+  fragment@1 {
+    target = <&gpio>;
+    __overlay__ {
+            pwm_pins: pwm_pins {
+                    brcm,pins = <13 10>;
+                    brcm,function = <4 1>;//alt0 to select PWM0
+                    bcrm,pull = <2 1>;
+            };
+    };
+  };
+
+
+  fragment@2 {
+    target = <&pwm>;
+    frag1: __overlay__ {
+            pinctrl-names = "default";
+            pinctrl-0 = <&pwm_pins>;
+            assigned-clock-rates = <100000000>;
+            status = "okay";
+    };
+  };
+
+  fragment@3 {
+    target-path = "/soc";
+    __overlay__ {
+         backlight: backlight {
+            compatible = "pwm-backlight";
+            brightness-levels = <255 0>;
+            num-interpolated-steps = <255>;
+            default-brightness-level = <50>;
+            pwms = <&pwm 1 5000000>;
+            enable-gpios = <&gpio 10 0>;
+            power-supply = <&vdd_3v3_reg>;
+            status = "okay";
+          };
+    };
+  };
+};
